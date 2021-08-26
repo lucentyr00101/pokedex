@@ -18,3 +18,8 @@
     </b-collapse>
   </b-navbar>
 </template>
+
+<style lang="stylus" scoped>
+.logo
+  max-width 130px
+</style>
