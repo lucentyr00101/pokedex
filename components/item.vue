@@ -12,6 +12,7 @@
       </span>
     </b-card-title>
     <b-card-text>
+      <p class="id">ID #: {{ details.id }}</p>
       <div class="d-flex">
         <Type
           v-for="(type, index) in details.types"
@@ -47,4 +48,8 @@ export default {
 <style lang="stylus" scoped>
 .card
   cursor pointer
+  .id
+    margin-bottom 10px
+    color #888787
+    font-weight 800
 </style>
