@@ -3,11 +3,13 @@
     <b-row>
       <template v-for="(item, i) in list.data">
         <b-col :key="i" lg="3">
-          <b-card-group deck>
-            <Item
-              :details="item.details"
-            />
-          </b-card-group>
+          <b-form-group>
+            <b-card-group deck>
+              <Item
+                :details="item.details"
+              />
+            </b-card-group>
+          </b-form-group>
         </b-col>
       </template>
     </b-row>
