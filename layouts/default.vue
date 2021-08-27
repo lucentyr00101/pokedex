@@ -1,7 +1,9 @@
 <template>
   <div>
     <Header />
-    <Nuxt />
+    <div class="py-5">
+      <Nuxt />
+    </div>
   </div>
 </template>
 

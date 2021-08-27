@@ -82,7 +82,7 @@ export default {
             type: type.name
           }
         })
-        console.log(details)
+        commit('setPokemon', details)
       } catch (e) {
         console.error('Something went wrong.')
       }

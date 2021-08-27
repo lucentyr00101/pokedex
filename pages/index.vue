@@ -1,7 +1,5 @@
 <template>
-  <div class="py-5">
-    <List />
-  </div>
+  <List />
 </template>
 
 <script>
