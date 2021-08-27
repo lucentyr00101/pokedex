@@ -20,6 +20,10 @@ export default {
     },
     setBusyList (state, payload) {
       state.busyList = payload
+    },
+    clearList (state) {
+      state.list.data = []
+      state.list.meta = {}
     }
   },
   actions: {

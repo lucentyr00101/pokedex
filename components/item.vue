@@ -5,6 +5,7 @@
     img-top
     header-class="text-capitalize"
     class="form-group"
+    @click="$router.push({ name: 'pokemon-name', params: { name: details.name } })"
   >
     <b-card-title>
       <span class="text-capitalize">

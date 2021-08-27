@@ -45,6 +45,9 @@ export default {
   created () {
     this.$store.dispatch('pokemon/fetchList')
   },
+  beforeDestroy () {
+    this.$store.commit('pokemon/clearList')
+  },
   methods: {
     loadMore () {
       this.$store.dispatch('pokemon/fetchList')
