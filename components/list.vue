@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row>
+    <b-row class="form-group">
       <template v-for="(item, i) in list.data">
         <b-col :key="i" lg="3">
           <b-form-group>
@@ -12,6 +12,21 @@
           </b-form-group>
         </b-col>
       </template>
+    </b-row>
+    <b-row class="form-group">
+      <b-col class="text-center">
+        <b-button
+          variant="primary"
+          :disabled="busyList"
+          @click="loadMore"
+        >
+          <b-spinner
+            v-if="busyList"
+            small
+          />
+          <span v-else>Load More</span>
+        </b-button>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -25,10 +40,15 @@ export default {
     Item
   },
   computed: {
-    ...mapGetters('pokemon', ['list'])
+    ...mapGetters('pokemon', ['list', 'busyList'])
   },
   created () {
     this.$store.dispatch('pokemon/fetchList')
+  },
+  methods: {
+    loadMore () {
+      this.$store.dispatch('pokemon/fetchList')
+    }
   }
 }
 </script>

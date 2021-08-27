@@ -12,18 +12,22 @@ export default {
   },
   mutations: {
     setList (state, { list, next }) {
-      state.list.data = list
-      state.list.meta = next
+      state.list.data = [
+        ...state.list.data,
+        ...list
+      ]
+      state.list.meta.next = next
     },
     setBusyList (state, payload) {
       state.busyList = payload
     }
   },
   actions: {
-    async fetchList ({ commit }, payload) {
+    async fetchList ({ commit, state }, payload) {
+      const url = state.list.meta.next || '/pokemon'
       commit('setBusyList', true)
       try {
-        const { results, next } = await this.$axios.$get('/pokemon')
+        const { results, next } = await this.$axios.$get(url)
         const details = await Promise.all(results.map(({ url }) => {
           return this.$axios.$get(url)
         }))
