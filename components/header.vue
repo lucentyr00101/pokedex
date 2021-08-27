@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">
-      <img class="logo" src="@/assets/images/logo.png" alt="">
+      <img class="logo" src="@/assets/images/logo.png" alt="" @click="$router.push({ name: 'index' })">
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse" />

@@ -13,7 +13,9 @@
       </span>
     </b-card-title>
     <b-card-text>
-      <p class="id">ID #: {{ details.id }}</p>
+      <p class="id">
+        ID #: {{ details.id }}
+      </p>
       <div class="d-flex">
         <Type
           v-for="(type, index) in details.types"
