@@ -1,3 +1,13 @@
 <template>
-  <span>Main Page</span>
+  <List />
 </template>
+
+<script>
+import List from '@/components/list'
+
+export default {
+  components: {
+    List
+  }
+}
+</script>
