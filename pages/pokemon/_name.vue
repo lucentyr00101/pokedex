@@ -18,6 +18,9 @@
             <b-col lg="3">
               <Moves :moves="pokemon.moves" />
             </b-col>
+            <b-col lg="6">
+              <Evolution :evolution="pokemon.evolution" />
+            </b-col>
           </b-row>
         </b-container>
       </b-col>
@@ -31,13 +34,15 @@ import Pokemon from '@/components/item'
 import Moves from '@/components/moves'
 import Stats from '@/components/stats'
 import Characteristics from '@/components/characteristics'
+import Evolution from '@/components/evolution'
 
 export default {
   components: {
     Pokemon,
     Moves,
     Stats,
-    Characteristics
+    Characteristics,
+    Evolution
   },
   computed: {
     ...mapGetters('pokemon', ['pokemon', 'busy'])

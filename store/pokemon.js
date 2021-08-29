@@ -68,7 +68,24 @@ export default {
         const species = await this.$axios.$get(details.species.url)
         const characteristics = species.flavor_text_entries.filter(item => item.language.name === 'en').map(characteristic => characteristic.flavor_text.replaceAll('\n', ' '))
         details.characteristics = [...new Set(characteristics)] // removes duplicates
-        console.log(details.characteristics)
+
+        const { chain } = await this.$axios.$get(species.evolution_chain.url)
+        const from = chain.species.name
+        details.evolvesFrom = await this.$axios.$get(`/pokemon/${from}`)
+
+        const evolutionNames = Object.keys(chain).reduce((arr, chainKey) => {
+          if (chainKey === 'species') {
+            const name = chain[chainKey].name
+            arr.unshift(name)
+          } else if (chainKey === 'evolves_to') {
+            arr.push(chain.evolves_to[0].species.name)
+            const names = chain.evolves_to[0].evolves_to.map(ev => ev.species.name)
+            arr.push(...names)
+          }
+          return arr
+        }, [])
+
+        details.evolution = await Promise.all(evolutionNames.map(evoName => this.$axios.$get(`/pokemon/${evoName}`)))
 
         const abilities = await Promise.all(details.abilities.map((ability) => {
           return this.$axios.$get(ability.ability.url)
