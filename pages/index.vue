@@ -1,7 +1,13 @@
 <template>
-  <Tutorial />
+  <List />
 </template>
 
 <script>
-export default {}
+import List from '@/components/list'
+
+export default {
+  components: {
+    List
+  }
+}
 </script>
