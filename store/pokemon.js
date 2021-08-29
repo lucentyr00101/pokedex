@@ -1,3 +1,5 @@
+import { sentenceCase } from '@/utils/formatter'
+
 export default {
   state: () => ({
     list: {
@@ -34,6 +36,9 @@ export default {
     clearList (state) {
       state.list.data = []
       state.list.meta = {}
+    },
+    clearPokemon (state) {
+      state.pokemon = {}
     }
   },
   actions: {
@@ -60,8 +65,10 @@ export default {
       try {
         const details = await this.$axios.$get(`/pokemon/${name}`)
 
-        const characteristics = await this.$axios.$get(`/characteristic/${details.id}`)
-        details.descriptions = characteristics.descriptions.find(description => description.language.name === 'en').description
+        const species = await this.$axios.$get(details.species.url)
+        const characteristics = species.flavor_text_entries.filter(item => item.language.name === 'en').map(characteristic => characteristic.flavor_text.replaceAll('\n', ' '))
+        details.characteristics = [...new Set(characteristics)] // removes duplicates
+        console.log(details.characteristics)
 
         const abilities = await Promise.all(details.abilities.map((ability) => {
           return this.$axios.$get(ability.ability.url)
@@ -73,13 +80,24 @@ export default {
         const moves = await Promise.all(details.moves.map((move) => {
           return this.$axios.$get(move.move.url)
         }))
-        details.moves = moves.map(({ effect_entries: effects, accuracy, pp, type }) => {
-          const effect = effects.find(effect => effect.language.name === 'en').effect
+        details.moves = moves.map(({ effect_entries: effects, accuracy, pp, type, name, effect_chance: chance }) => {
+          let effect = effects.find(effect => effect.language.name === 'en').effect
+          if (chance) {
+            effect = effect.replaceAll('$effect_chance', chance)
+          }
           return {
             effect,
-            accuracy,
+            accuracy: accuracy || 'N/A',
             pp,
-            type: type.name
+            type: type.name,
+            name: sentenceCase(name)
+          }
+        })
+
+        details.stats = details.stats.map((stat) => {
+          return {
+            name: sentenceCase(stat.stat.name),
+            value: stat.base_stat
           }
         })
         commit('setPokemon', details)
