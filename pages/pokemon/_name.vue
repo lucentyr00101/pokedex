@@ -2,7 +2,18 @@
   <b-container fluid>
     <b-row>
       <b-col lg="3">
-        <Pokemon :details="pokemon" />
+        <b-container fluid>
+          <b-row>
+            <b-col>
+              <Pokemon :details="pokemon" />
+            </b-col>
+          </b-row>
+          <b-row class="form-group">
+            <b-col lg="12">
+              <Types :types="pokemon.strsweaks" />
+            </b-col>
+          </b-row>
+        </b-container>
       </b-col>
       <b-col lg="9">
         <b-container fluid>
@@ -35,6 +46,7 @@ import Moves from '@/components/moves'
 import Stats from '@/components/stats'
 import Characteristics from '@/components/characteristics'
 import Evolution from '@/components/evolution'
+import Types from '@/components/types'
 
 export default {
   components: {
@@ -42,7 +54,8 @@ export default {
     Moves,
     Stats,
     Characteristics,
-    Evolution
+    Evolution,
+    Types
   },
   computed: {
     ...mapGetters('pokemon', ['pokemon', 'busy'])
