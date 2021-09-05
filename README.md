@@ -10,9 +10,10 @@
 ### Setting up
 1. Clone the repository - `git clone https://github.com/lucentyr00101/pokedex.git`
 2. After cloning, go to repository folder, type `cd pokedex`
-3. Type `npm install` or `npm i` to install **dependencies**
-4. After installing dependencies, type `npm run dev` to compile the project
-5. Access the project in browser via `localhost:3000`
+3. Copy .env.development as .env
+4. Type `npm install` or `npm i` to install **dependencies**
+5. After installing dependencies, type `npm run dev` to compile the project
+6. Access the project in browser via `localhost:3000`
 
 ## Libraries
 - [Nuxt JS](https://nuxtjs.org/) - Javascript Framework based on Vue JS
